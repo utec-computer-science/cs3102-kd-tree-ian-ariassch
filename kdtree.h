@@ -20,16 +20,12 @@ public:
    };
 
    Node* root = NULL;
-<<<<<<< HEAD
-   
-=======
    int k;
 
    KDTree(int k)
    {
      this->k=k;
    }
->>>>>>> feature/Structure
    bool Insert(T x, T y);
    bool Search(T x, T y);
 
