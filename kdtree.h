@@ -11,6 +11,7 @@ public:
   {
     public:
       T x, y;
+      int level;
       Node *left, *right;
       Node(T _x, T _y)
       {
