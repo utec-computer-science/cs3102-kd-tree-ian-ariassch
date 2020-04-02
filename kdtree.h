@@ -1,9 +1,9 @@
+#ifndef KDTREE_H
+#define KDTREE_H
+
 #include <iostream>
 
-using namespace std;
-
-
-template <class T>
+template <typename T>
 class KDTree
 {
 public:
@@ -22,11 +22,10 @@ public:
    Node* root = NULL;
    int k;
 
-   KDTree(int k)
-   {
-     this->k=k;
-   }
+   KDTree(int k);
+
    bool Insert(T x, T y);
    bool Search(T x, T y);
 
 };
+#endif
