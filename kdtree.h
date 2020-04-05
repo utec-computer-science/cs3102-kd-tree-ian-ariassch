@@ -20,12 +20,13 @@ public:
       }
    };
 
-   Node* root = NULL;
+   Node* root;
    int k;
 
    KDTree(int k);
 
    bool Insert(T x, T y);
+   bool Insert(Node* nodo, Node* ptr);
    bool Search(T x, T y);
 
 };

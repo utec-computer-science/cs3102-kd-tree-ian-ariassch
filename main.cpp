@@ -5,6 +5,15 @@ using namespace std;
 int main()
 {
   KDTree<int> tree(2);
-  tree.Insert(2,3);
-  cout<<tree.root->x<<endl;
+  tree.Insert(3,6);
+  tree.Insert(17,15);
+  tree.Insert(2,7);
+  tree.Insert(13,15);
+  tree.Insert(6,12);
+  tree.Insert(9,1);
+  tree.Insert(2,7);
+  tree.Insert(10,19);
+
+  cout<<tree.root->right->right->left->x;
+
 }

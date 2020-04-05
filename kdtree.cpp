@@ -3,55 +3,84 @@
 using namespace std;
 
 template <typename T>
-KDTree<T>::KDTree(int k)
+KDTree<T>::KDTree(int _k)
 {
-  this->k = k;
-  root->level = 1;
+  k = _k;
+  root = NULL;
 }
 
 template <typename T>
 bool KDTree<T>::Insert(T x, T y)
 {
   auto tempNode = new Node(x,y);
-  Node *ptr(0,0);
 
   if(!root)
   {
     root = tempNode;
+    root->level = 1;
     tempNode = NULL;
     delete tempNode;
-    cout<<root->x;
   }
   else
   {
-    ptr = root;
-    if(ptr->level % k == 1)
+    Insert(tempNode, root);
+  }
+}
+
+template <typename T>
+bool KDTree<T>::Insert(Node* nodo, Node* ptr)
+{
+  nodo->level = ptr->level+1;
+  if(ptr->level % k == 1)
+  {
+    if(nodo->x < ptr->x)
     {
-      if(tempNode->x < ptr->x)
+      if(!ptr->left)
       {
-        if(ptr->left)
-        {
-          ptr = ptr->left
-        };
-        ptr->left = tempNode;
-      }
-      else if(tempNode->x > ptr->x && !ptr->right)
-      {
-        ptr->right = tempNode;
-      }
-        tempNode->level = ptr->level+1;
-    }
-    else if(ptr->level % k == 0)
-    {
-      if(tempNode->y < ptr->y)
-      {
-        ptr->left = tempNode;
+        ptr->left = nodo;
       }
       else
       {
-        ptr->right = tempNode;
+        Insert(nodo, ptr->left);
       }
-        tempNode->level = ptr->level+1;
     }
+    else
+    {
+      if(!ptr->right)
+      {
+        ptr->right = nodo;
+      }
+      else
+      {
+        Insert(nodo, ptr->right);
+      }
+    }
+
+  }
+  else if(ptr->level % k == 0)
+  {
+    if(nodo->y < ptr->y)
+    {
+      if(!ptr->left)
+      {
+        ptr->left = nodo;
+      }
+      else
+      {
+        Insert(nodo, ptr->left);
+      }
+    }
+    else
+    {
+      if(!ptr->right)
+      {
+        ptr->right = nodo;
+      }
+      else
+      {
+        Insert(nodo, ptr->right);
+      }
+    }
+      nodo->level = ptr->level+1;
   }
 }
