@@ -84,3 +84,31 @@ bool KDTree<T>::Insert(Node* nodo, Node* ptr)
       nodo->level = ptr->level+1;
   }
 }
+
+template <typename T>
+void KDTree<T>::print()
+{
+  Node* ptr = root;
+  cout<<ptr<<endl;
+  cout<<"Left: "<<ptr->left<<endl;
+  cout<<"Right: "<<ptr->right<<endl;
+  ptr = ptr->right;
+  cout<<ptr<<endl;
+  cout<<"Left: "<<ptr->left<<endl;
+  cout<<"Right: "<<ptr->right<<endl;
+  ptr = ptr->right;
+  cout<<ptr<<endl;
+  cout<<"Left: "<<ptr->left<<endl;
+  cout<<"Right: "<<ptr->right<<endl;
+  ptr = root->right->left;
+  cout<<ptr<<endl;
+  cout<<"Left: "<<ptr->left<<endl;
+  cout<<"Right: "<<ptr->right<<endl;
+  ptr = ptr->right;
+  cout<<ptr<<endl;
+  cout<<"Left: "<<ptr->left<<endl;
+  cout<<"Right: "<<ptr->right<<endl;
+
+
+
+}

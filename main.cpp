@@ -14,6 +14,6 @@ int main()
   tree.Insert(2,7);
   tree.Insert(10,19);
 
-  cout<<tree.root->right->right->left->x;
+  tree.print();
 
 }
