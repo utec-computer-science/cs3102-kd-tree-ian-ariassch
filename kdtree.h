@@ -38,6 +38,7 @@ public:
    bool Insert(Node* nodo, Node* ptr);
    bool Search(T x, T y);
    void print();
+   void printaux(Node *root, int space);
 
 
 

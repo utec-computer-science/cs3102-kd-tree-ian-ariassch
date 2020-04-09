@@ -86,29 +86,23 @@ bool KDTree<T>::Insert(Node* nodo, Node* ptr)
 }
 
 template <typename T>
+void KDTree<T>::printaux(Node *root, int indent)
+{
+
+    if (root == NULL)
+        return;
+    indent += 11;
+    printaux(root->right, indent);
+    cout<<endl;
+    for (int i = 11; i < indent; i++)
+        cout<<" ";
+    cout<<root<<"\n";
+
+    printaux(root->left, indent);
+}
+
+template <typename T>
 void KDTree<T>::print()
 {
-  Node* ptr = root;
-  cout<<ptr<<endl;
-  cout<<"Left: "<<ptr->left<<endl;
-  cout<<"Right: "<<ptr->right<<endl;
-  ptr = ptr->right;
-  cout<<ptr<<endl;
-  cout<<"Left: "<<ptr->left<<endl;
-  cout<<"Right: "<<ptr->right<<endl;
-  ptr = ptr->right;
-  cout<<ptr<<endl;
-  cout<<"Left: "<<ptr->left<<endl;
-  cout<<"Right: "<<ptr->right<<endl;
-  ptr = root->right->left;
-  cout<<ptr<<endl;
-  cout<<"Left: "<<ptr->left<<endl;
-  cout<<"Right: "<<ptr->right<<endl;
-  ptr = ptr->right;
-  cout<<ptr<<endl;
-  cout<<"Left: "<<ptr->left<<endl;
-  cout<<"Right: "<<ptr->right<<endl;
-
-
-
+  printaux(root, 0);
 }
