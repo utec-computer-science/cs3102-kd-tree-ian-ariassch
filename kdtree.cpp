@@ -10,6 +10,50 @@ KDTree<T>::KDTree(int _k)
 }
 
 template <typename T>
+bool KDTree<T>::compareNodes(pair<T,T> a, Node* b)
+{
+  return (a.first == b->x && a.second == b->y);
+}
+
+
+template <typename T>
+bool KDTree<T>::Search(pair<T,T> x)
+{
+  Search(x, root);
+}
+
+template <typename T>
+bool KDTree<T>::Search(pair<T,T> x, Node* ptr)
+{
+  if(!ptr) return false;
+  if(compareNodes(x, ptr)) return true;
+
+  int dimension = ptr->level % k;
+  if(dimension == 0)
+  {
+    if(x.first < ptr->x)
+    {
+      Search(x, ptr->left);
+    }
+    else
+    {
+      Search(x, ptr->right);
+    }
+  }
+  else
+  {
+    if(x.second < ptr->y)
+    {
+      Search(x, ptr->left);
+    }
+    else
+    {
+      Search(x, ptr->right);
+    }
+  }
+}
+
+template <typename T>
 bool KDTree<T>::Insert(T x, T y)
 {
   auto tempNode = new Node(x,y);
@@ -17,7 +61,7 @@ bool KDTree<T>::Insert(T x, T y)
   if(!root)
   {
     root = tempNode;
-    root->level = 1;
+    root->level = 0;
     tempNode = NULL;
     delete tempNode;
   }
@@ -31,7 +75,7 @@ template <typename T>
 bool KDTree<T>::Insert(Node* nodo, Node* ptr)
 {
   nodo->level = ptr->level+1;
-  if(ptr->level % k == 1)
+  if(ptr->level % k == 0)
   {
     if(nodo->x < ptr->x)
     {
@@ -57,7 +101,7 @@ bool KDTree<T>::Insert(Node* nodo, Node* ptr)
     }
 
   }
-  else if(ptr->level % k == 0)
+  else if(ptr->level % k == 1)
   {
     if(nodo->y < ptr->y)
     {
