@@ -18,6 +18,15 @@ public:
         x = _x;
         y = _y;
       }
+
+      friend std::ostream& operator<<(std::ostream& os, Node* nodo)
+      {
+        if(nodo)
+        os << "(" << nodo->x <<","<< nodo->y<<")";
+        else{os << "NULL";}
+        return os;
+      }
+
    };
 
    Node* root;
@@ -28,6 +37,10 @@ public:
    bool Insert(T x, T y);
    bool Insert(Node* nodo, Node* ptr);
    bool Search(T x, T y);
+   void print();
+   void printaux(Node *root, int space);
+
+
 
 };
 #endif

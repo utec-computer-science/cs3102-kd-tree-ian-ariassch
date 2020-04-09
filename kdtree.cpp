@@ -84,3 +84,25 @@ bool KDTree<T>::Insert(Node* nodo, Node* ptr)
       nodo->level = ptr->level+1;
   }
 }
+
+template <typename T>
+void KDTree<T>::printaux(Node *root, int indent)
+{
+
+    if (root == NULL)
+        return;
+    indent += 11;
+    printaux(root->right, indent);
+    cout<<endl;
+    for (int i = 11; i < indent; i++)
+        cout<<" ";
+    cout<<root<<"\n";
+
+    printaux(root->left, indent);
+}
+
+template <typename T>
+void KDTree<T>::print()
+{
+  printaux(root, 0);
+}
