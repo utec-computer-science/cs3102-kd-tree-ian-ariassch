@@ -2,6 +2,7 @@
 #define KDTREE_H
 
 #include <iostream>
+#include <stdio.h>
 
 template <typename T>
 class KDTree
@@ -18,6 +19,16 @@ public:
         x = _x;
         y = _y;
       }
+
+      friend std::ostream& operator<<(std::ostream& os, Node* nodo)
+      {
+        if(nodo)
+        os << "(" << nodo->x <<","<< nodo->y<<")";
+        else{os << "NULL";}
+        return os;
+      }
+
+
    };
 
    Node* root;
@@ -25,9 +36,15 @@ public:
 
    KDTree(int k);
 
+   bool compareNodes(std::pair<T,T> a, Node* b);
    bool Insert(T x, T y);
    bool Insert(Node* nodo, Node* ptr);
-   bool Search(T x, T y);
+   bool Search(std::pair<T,T> x);
+   bool Search(std::pair<T,T> x, Node* ptr);
+   void print();
+   void printaux(Node *root, int space);
+
+
 
 };
 #endif
